@@ -12,13 +12,16 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:text="0" />
 
     <Button
         android:id="@+id/resetbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button" />
+
+
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

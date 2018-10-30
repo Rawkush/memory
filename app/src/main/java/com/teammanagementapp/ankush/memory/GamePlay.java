@@ -1,6 +1,7 @@
 package com.teammanagementapp.ankush.memory;
 
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,14 +11,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static java.lang.Integer.parseInt;
+
 public class GamePlay extends AppCompatActivity {
 
 
     RecyclerView recyclerView;
     TextView timertextView;
-    CountDownTimer countDownTimer;
-    final int gameTime = 120;  // 2 min
+    //CountDownTimer countDownTimer;
+  //  final int gameTime = 120;  // 2 min
     Button resetbtn;
+
 
 
     @Override
@@ -48,40 +52,50 @@ public class GamePlay extends AppCompatActivity {
 
 
     private void startTimer() {
+//
+//        countDownTimer = new CountDownTimer(gameTime * 1000 + 100, 1000) {
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//
+//                updateTime((int) (millisUntilFinished / 1000));
+//
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//
+//                    //TODO Stop the game here
+//
+//            }  // first param is timer till which to count
+//
+//
+//        }.start();
 
-        countDownTimer = new CountDownTimer(gameTime * 1000 + 100, 1000) {
+
+        final Handler handler= new Handler(); // it allows delaying
+        Runnable run=new Runnable() {  //chunk of code that handler handles is called runnable
             @Override
-            public void onTick(long millisUntilFinished) {
-
-                updateTime((int) (millisUntilFinished / 1000));
-
+            public void run() {
+                // code to be run every second or afteer a period of time
+                handler.postDelayed(this,1000);
+                updateTime();
             }
-
-            @Override
-            public void onFinish() {
-
-                    //TODO Stop the game here
-
-            }  // first param is timer till which to count
-
-
-        }.start();
+        };
+        handler.post(run); // ruun
 
 
     }
 
-    public void updateTime(int secondsLeft){
-
-        int minutes =(int) secondsLeft/ 60;
-        int seconds= secondsLeft-minutes*60;
-        timertextView.setText(Integer.toString(minutes)+":"+Integer.toString(seconds));
-
+    public void updateTime(){
+        if(!timertextView.getText().toString().equals("")) {
+            int time = Integer.parseInt(timertextView.getText().toString());
+            timertextView.setText("" + (time + 1));
+        }
 
     }
 
     public void resettimer(){
-        countDownTimer.cancel();
-
+        timertextView.setText("0");
     }
 
 
