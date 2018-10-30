@@ -28,11 +28,11 @@ public class Main2Activity extends AppCompatActivity {
         textView1=findViewById(R.id.textView);
         textView2=findViewById(R.id.textView2);
         textView3=findViewById(R.id.textView3);
-        textView4=findViewById(R.id.textView);
-        textView5=findViewById(R.id.textView);
-        textView6=findViewById(R.id.textView);
-        textView7=findViewById(R.id.textView);
-        textView8=findViewById(R.id.textView);
+        textView4=findViewById(R.id.textView4);
+        textView5=findViewById(R.id.textView5);
+        textView6=findViewById(R.id.textView6);
+        textView7=findViewById(R.id.textView7);
+        textView8=findViewById(R.id.textView8);
         textView9=findViewById(R.id.textView);
         textView10=findViewById(R.id.textView);
         textView11=findViewById(R.id.textView);
