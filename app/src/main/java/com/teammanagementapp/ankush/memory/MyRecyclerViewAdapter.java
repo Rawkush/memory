@@ -8,9 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
     private String[] mData;
+    private List<String> list;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
@@ -18,6 +24,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     MyRecyclerViewAdapter(Context context, String[] data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        list= new ArrayList<String>();
+        createListOfpics();
     }
 
     // inflates the cell layout from xml when needed
@@ -31,8 +39,37 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // binds the data to the TextView in each cell
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.myTextView.setText(mData[position]);
+        //holder.myTextView.setText(mData[position]);
+        //TODO finding random number and
+        holder.myTextView.setText(randompics());
+
     }
+
+
+
+
+
+
+    private  void createListOfpics(){
+
+        Collections.addAll(list, mData); /// adding the string into list
+
+    }
+
+
+    private String randompics(){
+
+        Random rand = new Random();
+        int  n = rand.nextInt(list.size());
+        String pic = list.get(n);
+        list.remove(n);
+
+        return pic;
+    }
+
+
+
+
 
     // total number of cells
     @Override
