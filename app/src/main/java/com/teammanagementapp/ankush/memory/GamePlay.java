@@ -25,7 +25,6 @@ public class GamePlay extends AppCompatActivity implements MyRecyclerViewAdapter
     RecyclerView recyclerView;
     TextView timertextView;
     Button resetbtn;
-    int position=-1;
 
 
 
