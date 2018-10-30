@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import static java.lang.Integer.parseInt;
 
-public class GamePlay extends AppCompatActivity {
 public class GamePlay extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
 
@@ -48,11 +47,11 @@ public class GamePlay extends AppCompatActivity implements MyRecyclerViewAdapter
             }
         });
 
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.rvNumbers);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this,4));
 
-        String[] data = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48"};
+        String[] data = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
@@ -111,11 +110,13 @@ public class GamePlay extends AppCompatActivity implements MyRecyclerViewAdapter
     public void resettimer(){
         timertextView.setText("0");
     }
+
+
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText( this, "You clicked number " + adapter.getItem(position) + ", which is at cell position " + position, Toast.LENGTH_SHORT ).show();
     }
-}
+
 
 
 
