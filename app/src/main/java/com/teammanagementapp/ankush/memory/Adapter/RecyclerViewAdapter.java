@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.teammanagementapp.ankush.memory.MyRecyclerViewAdapter;
 import com.teammanagementapp.ankush.memory.R;
 
 import java.util.ArrayList;
