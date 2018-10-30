@@ -1,11 +1,8 @@
 package com.teammanagementapp.ankush.memory;
-
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -13,18 +10,22 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.teammanagementapp.ankush.memory.Adapter.RecyclerViewAdapter;
+
 import static java.lang.Integer.parseInt;
 
 public class GamePlay extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
 
-    TextView textView;
+
     MyRecyclerViewAdapter adapter;
+
+    //RecyclerViewAdapter adapter;
+
     RecyclerView recyclerView;
     TextView timertextView;
-    //CountDownTimer countDownTimer;
-  //  final int gameTime = 120;  // 2 min
     Button resetbtn;
+    int position=-1;
 
 
 
@@ -57,9 +58,12 @@ public class GamePlay extends AppCompatActivity implements MyRecyclerViewAdapter
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
         int numberOfColumns = 6;
         recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+//        adapter=new RecyclerViewAdapter(this,data);
         adapter = new MyRecyclerViewAdapter(this, data);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+
+
 
     }
 
@@ -115,6 +119,8 @@ public class GamePlay extends AppCompatActivity implements MyRecyclerViewAdapter
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText( this, "You clicked number " + adapter.getItem(position) + ", which is at cell position " + position, Toast.LENGTH_SHORT ).show();
+
+
     }
 
 
