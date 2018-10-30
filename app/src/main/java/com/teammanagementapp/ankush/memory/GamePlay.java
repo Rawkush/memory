@@ -3,6 +3,7 @@ package com.teammanagementapp.ankush.memory;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,7 +14,6 @@ public class GamePlay extends AppCompatActivity {
 
 
     RecyclerView recyclerView;
-    TextView textView;
     TextView timertextView;
     CountDownTimer countDownTimer;
     final int gameTime = 120;  // 2 min
@@ -39,10 +39,10 @@ public class GamePlay extends AppCompatActivity {
             }
         });
 
-//        recyclerView = findViewById(R.id.recycler_view);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,4));
+
 
     }
 
@@ -83,6 +83,7 @@ public class GamePlay extends AppCompatActivity {
         countDownTimer.cancel();
 
     }
+
 
 
 }
