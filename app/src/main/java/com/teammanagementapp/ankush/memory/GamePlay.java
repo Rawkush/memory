@@ -16,7 +16,7 @@ public class GamePlay extends AppCompatActivity {
     TextView textView;
     TextView timertextView;
     CountDownTimer countDownTimer;
-    final int gameTime = 12;
+    final int gameTime = 120;  // 2 min
     Button resetbtn;
 
 
@@ -24,7 +24,11 @@ public class GamePlay extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay);
+
         timertextView = findViewById(R.id.time);
+
+        startTimer();
+
         resetbtn=findViewById(R.id.resetbtn);
         resetbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,15 +39,15 @@ public class GamePlay extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+//        recyclerView = findViewById(R.id.recycler_view);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
 
     }
 
 
-    private void StartTimer() {
+    private void startTimer() {
 
         countDownTimer = new CountDownTimer(gameTime * 1000 + 100, 1000) {
             @Override
@@ -61,18 +65,18 @@ public class GamePlay extends AppCompatActivity {
             }  // first param is timer till which to count
 
 
-        };
+        }.start();
 
 
     }
-
-
 
     public void updateTime(int secondsLeft){
 
         int minutes =(int) secondsLeft/ 60;
         int seconds= secondsLeft-minutes*60;
         timertextView.setText(Integer.toString(minutes)+":"+Integer.toString(seconds));
+
+
     }
 
     public void resettimer(){
