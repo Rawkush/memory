@@ -1,4 +1,4 @@
-package com.teammanagementapp.ankush.memory;
+package com.badgenius.memory;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.teammanagementapp.ankush.memory", appContext.getPackageName());
+        assertEquals("com.badgenius.memory", appContext.getPackageName());
     }
 }

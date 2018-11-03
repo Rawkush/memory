@@ -1,4 +1,4 @@
-package com.teammanagementapp.ankush.memory;
+package com.badgenius.memory;
 
 import org.junit.Test;
 

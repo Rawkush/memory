@@ -7,7 +7,7 @@
     tools:context=".MainActivity"
     android:background="@drawable/fisher"
     tools:layout_editor_absoluteY="81dp"
-   >
+    >
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,15 +31,17 @@
         android:textSize="20sp"
         android:text="1. Selecting two similar consecutive boxes will make them disappear.\n2. Removing all the boxes will make the user win." />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="38dp"
-        android:clickable="true"
-        app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
+        android:layout_marginStart="140dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/magnitude_circle2"
+        android:text="Play"
+        android:textSize="38sp" />
+
 
 </RelativeLayout>

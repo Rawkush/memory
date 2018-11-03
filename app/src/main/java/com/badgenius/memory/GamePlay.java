@@ -1,4 +1,5 @@
-package com.teammanagementapp.ankush.memory;
+package com.badgenius.memory;
+
 import android.content.Context;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -10,25 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.teammanagementapp.ankush.memory.Adapter.RecyclerViewAdapter;
-import com.teammanagementapp.ankush.memory.model.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.Integer.parseInt;
-
 public class GamePlay extends AppCompatActivity {
 
 
     TextView textViewG;
     TextView QuestionG;
+
+    int prevPos;
 
 
     boolean first = true;
@@ -46,7 +42,7 @@ public class GamePlay extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gameplay);
+        setContentView(R.layout.activity_game_play);
 
         timertextView = findViewById(R.id.time);
 
@@ -70,7 +66,7 @@ public class GamePlay extends AppCompatActivity {
         int numberOfColumns = 6;
         recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
 //        adapter=new RecyclerViewAdapter(this,data);
-        adapter = new MyRecyclerViewAdapter(this, data);
+        adapter = new MyRecyclerViewAdapter(getApplicationContext(), data);
         recyclerView.setAdapter(adapter);
 
 
