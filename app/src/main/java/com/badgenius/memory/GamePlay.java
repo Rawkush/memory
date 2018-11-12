@@ -1,5 +1,6 @@
 package com.badgenius.memory;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.badgenius.memory.adapter.MyRecyclerViewAdapter;
+import com.badgenius.memory.model.Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +34,7 @@ public class GamePlay extends AppCompatActivity {
     String[] data = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
     RecyclerView recyclerView;
     TextView timertextView;
-    ArrayList<String> list= new ArrayList<String>();
+    ArrayList<Model> list= new ArrayList<Model>();
     Button resetbtn;
 
 
@@ -70,9 +72,8 @@ public class GamePlay extends AppCompatActivity {
     }
 
 
-
-
-    public class MyAsyncTask extends AsyncTask<Void,Void, Void>{
+    @SuppressLint("StaticFieldLeak")
+    public  class MyAsyncTask extends AsyncTask<Void,Void, Void>{
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -102,7 +103,7 @@ public class GamePlay extends AppCompatActivity {
         Random rand = new Random();
         int n = rand.nextInt(temp.size());
         String pic = temp.get(n);
-        list.add(pic);
+        list.add(new Model(pic));
         temp.remove(n);
         }
     }

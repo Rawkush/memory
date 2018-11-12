@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.badgenius.memory.R;
+import com.badgenius.memory.model.Model;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,11 +19,11 @@ import java.util.Random;
 public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
 
-    private List<String> list=new ArrayList();
+    private List<Model> list=new ArrayList();
     private LayoutInflater mInflater;
 
     // data is passed into the constructor
-    public  MyRecyclerViewAdapter(Context context, ArrayList<String> list) {
+    public  MyRecyclerViewAdapter(Context context, ArrayList<Model> list) {
         this.mInflater = LayoutInflater.from(context);
         this.list=list;
     }
@@ -36,10 +38,25 @@ public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewA
 
     // binds the data to the TextView in each cell
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         //holder.myTextView.setText(mData[position]);
         //TODO finding random number and
-        holder.myTextView.setText(list.get(position));
+        final Model data = list.get(position);
+        holder.setIsRecyclable(true);
+        holder.myTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(data.isSelected()){
+                   holder.questionMark.setVisibility(View.INVISIBLE);
+                }  else
+                    holder.questionMark.setVisibility(View.VISIBLE);
+
+                data.setSelected(!data.isSelected());
+
+
+            }
+        });
+        holder.myTextView.setText(list.get(position).getText());
 
     }
 
