@@ -17,15 +17,16 @@ import java.util.List;
 public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
 
-    private List<Model> list=new ArrayList();
+    private List<Model> list = new ArrayList();
     private LayoutInflater mInflater;
-    private String prevData=null;
-    private int prevPos=-1;
-    ViewHolder preViewHolder=null;
+    private String prevData = null;
+    private int prevPos = -1;
+    ViewHolder preViewHolder = null;
+
     // data is passed into the constructor
-    public  MyRecyclerViewAdapter(Context context, ArrayList<Model> list) {
+    public MyRecyclerViewAdapter(Context context, ArrayList<Model> list) {
         this.mInflater = LayoutInflater.from(context);
-        this.list=list;
+        this.list = list;
     }
 
     // inflates the cell layout from xml when needed
@@ -38,43 +39,69 @@ public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewA
 
     // binds the data to the TextView in each cell
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder,  int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         //holder.myTextView.setText(mData[position]);
         //TODO finding random number and
+
         final Model data = list.get(position);
         holder.setIsRecyclable(true);
         holder.myTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean match=false;
+                if(!data.isSelected()){
+                    data.setSelected(true);
 
-                data.setSelected(!data.isSelected());
-                if(data.isSelected()){
-                   holder.questionMark.setVisibility(View.INVISIBLE);
 
-                   if(data.getText().equals(prevData)&& prevPos!=holder.getAdapterPosition()){
+                    //unhide data
+
+                    if( data.getText().equals(prevData)&&prevPos!=position){
+                       preViewHolder.myTextView.setVisibility(View.INVISIBLE);
                        holder.questionMark.setVisibility(View.INVISIBLE);
                        holder.myTextView.setVisibility(View.INVISIBLE);
-                       preViewHolder.myTextView.setVisibility(View.INVISIBLE);
-                       preViewHolder.questionMark.setVisibility(View.INVISIBLE);
-                   }else{
-                       if(preViewHolder!=null){
-                           preViewHolder.questionMark.setVisibility(View.VISIBLE);
-                       }
-                   }
+                       //reset them
+                        match=true;
 
-                }  else {
+                   }else{
+                       if(preViewHolder!=null) {
+                           preViewHolder.questionMark.setVisibility(View.VISIBLE);
+                           Model model= list.get(prevPos);
+                           if(position!=prevPos)
+                           model.setSelected(false);
+                       }
+                    }
+
+
+                    holder.questionMark.setVisibility(View.INVISIBLE);
+
+
+                    // making currently selected as previous data
+                        prevPos=position;
+                        preViewHolder=holder;
+                        prevData=data.getText();
+                        if(match){
+                            prevData=null;
+                            preViewHolder=null;
+                            prevPos=-1;
+                            match=false;
+
+                        }
+
+                }else{
+                    // data is already selected
+                    // same data pressed twice
                     holder.questionMark.setVisibility(View.VISIBLE);
+                    data.setSelected(false);
 
                 }
 
-                prevPos=holder.getAdapterPosition();
-                prevData=data.getText();
-                preViewHolder=holder;
+
             }
         });
         holder.myTextView.setText(list.get(position).getText());
 
     }
+
 
 
 
@@ -86,7 +113,7 @@ public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewA
 
 
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView myTextView;
         TextView questionMark;
 
@@ -94,22 +121,10 @@ public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewA
             super(itemView);
             myTextView = itemView.findViewById(R.id.info_text);
             questionMark = itemView.findViewById(R.id.questionMark);
-            itemView.setOnClickListener(this);
 
         }
-
-        @Override
-        public void onClick(View view) {
-
-
-
-
-            }
-        }
-
-
+    }
 
 
 }
-
 
