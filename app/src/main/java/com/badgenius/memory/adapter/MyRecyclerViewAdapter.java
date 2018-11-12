@@ -12,16 +12,16 @@ import com.badgenius.memory.R;
 import com.badgenius.memory.model.Model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
 
     private List<Model> list=new ArrayList();
     private LayoutInflater mInflater;
-
+    private String prevData=null;
+    private int prevPos=-1;
+    ViewHolder preViewHolder=null;
     // data is passed into the constructor
     public  MyRecyclerViewAdapter(Context context, ArrayList<Model> list) {
         this.mInflater = LayoutInflater.from(context);
@@ -38,7 +38,7 @@ public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewA
 
     // binds the data to the TextView in each cell
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder,  int position) {
         //holder.myTextView.setText(mData[position]);
         //TODO finding random number and
         final Model data = list.get(position);
@@ -46,14 +46,30 @@ public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewA
         holder.myTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(data.isSelected()){
-                   holder.questionMark.setVisibility(View.INVISIBLE);
-                }  else
-                    holder.questionMark.setVisibility(View.VISIBLE);
 
                 data.setSelected(!data.isSelected());
+                if(data.isSelected()){
+                   holder.questionMark.setVisibility(View.INVISIBLE);
 
+                   if(data.getText().equals(prevData)&& prevPos!=holder.getAdapterPosition()){
+                       holder.questionMark.setVisibility(View.INVISIBLE);
+                       holder.myTextView.setVisibility(View.INVISIBLE);
+                       preViewHolder.myTextView.setVisibility(View.INVISIBLE);
+                       preViewHolder.questionMark.setVisibility(View.INVISIBLE);
+                   }else{
+                       if(preViewHolder!=null){
+                           preViewHolder.questionMark.setVisibility(View.VISIBLE);
+                       }
+                   }
 
+                }  else {
+                    holder.questionMark.setVisibility(View.VISIBLE);
+
+                }
+
+                prevPos=holder.getAdapterPosition();
+                prevData=data.getText();
+                preViewHolder=holder;
             }
         });
         holder.myTextView.setText(list.get(position).getText());
@@ -84,6 +100,7 @@ public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewA
 
         @Override
         public void onClick(View view) {
+
 
 
 
