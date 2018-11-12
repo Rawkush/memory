@@ -84,7 +84,6 @@ public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewA
                             preViewHolder=null;
                             prevPos=-1;
                             match=false;
-
                         }
 
                 }else{

@@ -52,7 +52,10 @@ public class GamePlay extends AppCompatActivity {
             public void onClick(View v) {
                 resettimer();
                 //TODO resetGame();
-
+                list.clear();
+                adapter.notifyDataSetChanged();
+                MyAsyncTask task = new MyAsyncTask();
+                task.execute();
             }
         });
 
