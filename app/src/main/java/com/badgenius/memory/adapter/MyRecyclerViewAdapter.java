@@ -40,8 +40,6 @@ public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewA
     // binds the data to the TextView in each cell
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        //holder.myTextView.setText(mData[position]);
-        //TODO finding random number and
 
         final Model data = list.get(position);
         holder.setIsRecyclable(true);

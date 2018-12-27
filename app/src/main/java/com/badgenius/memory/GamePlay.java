@@ -29,7 +29,7 @@ public class GamePlay extends AppCompatActivity {
 
 
     MyRecyclerViewAdapter adapter;
-
+    Thread thread=new Thread();
     //RecyclerViewAdapter adapter;
     String[] data = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
     RecyclerView recyclerView;
@@ -51,11 +51,8 @@ public class GamePlay extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 resettimer();
-                //TODO resetGame();
                 list.clear();
-                adapter.notifyDataSetChanged();
-                MyAsyncTask task = new MyAsyncTask();
-                task.execute();
+                createUI();
             }
         });
 
@@ -69,39 +66,42 @@ public class GamePlay extends AppCompatActivity {
 //        adapter=new RecyclerViewAdapter(this,data);
         adapter = new MyRecyclerViewAdapter(getApplicationContext(), list);
         recyclerView.setAdapter(adapter);
+/*
         MyAsyncTask task= new MyAsyncTask();
         task.execute();
+*/
+        createUI();
 
     }
 
 
-    @SuppressLint("StaticFieldLeak")
-    public  class MyAsyncTask extends AsyncTask<Void,Void, Void>{
+    private void createUI(){
 
-        @Override
-        protected Void doInBackground(Void... voids) {
 
-            createListOfpics();
-
-            return null;
+        if(thread.getName().equals("creatingUI")){
+            thread.interrupt();
         }
+        thread= new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    adapter.notifyDataSetChanged();
-                    startTimer();
+                createListOfpics();
 
-                }
-            });
-
+            }
+        });
+        thread.setName("creatingUI");
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        adapter.notifyDataSetChanged();
+        startTimer();
+
     }
 
-    private void randompics(ArrayList<String> temp) {
+    private synchronized void randompics(ArrayList<String> temp) {
         for(int i=0;i<temp.size();){
         Random rand = new Random();
         int n = rand.nextInt(temp.size());
@@ -117,25 +117,6 @@ public class GamePlay extends AppCompatActivity {
     }
 
     private void startTimer() {
-//
-//        countDownTimer = new CountDownTimer(gameTime * 1000 + 100, 1000) {
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//
-//                updateTime((int) (millisUntilFinished / 1000));
-//
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//
-//                    //TODO Stop the game here
-//
-//            }  // first param is timer till which to count
-//
-//
-//        }.start();
-
 
         final Handler handler = new Handler(); // it allows delaying
         Runnable run = new Runnable() {  //chunk of code that handler handles is called runnable
@@ -160,6 +141,6 @@ public class GamePlay extends AppCompatActivity {
     }
 
     public void resettimer() {
-        timertextView.setText("0");
+        timertextView.setText("00");
     }
 }
