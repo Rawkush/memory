@@ -61,14 +61,15 @@ public class GamePlay extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rvNumbers);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
         int numberOfColumns = 6;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 //        adapter=new RecyclerViewAdapter(this,data);
         adapter = new MyRecyclerViewAdapter(getApplicationContext(), list);
         recyclerView.setAdapter(adapter);
+
 /*
         MyAsyncTask task= new MyAsyncTask();
         task.execute();

@@ -34,6 +34,11 @@ public  class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewA
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.item, parent, false);
+        // 6, 4 is dimension of thee
+        int height = parent.getMeasuredHeight() / 6;
+        int width = parent.getMeasuredWidth()/4;
+        view.setLayoutParams(new RecyclerView.LayoutParams(width, height));
+
         return new ViewHolder(view);
     }
 
