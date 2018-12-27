@@ -30,6 +30,9 @@ public class GamePlay extends AppCompatActivity {
 
     MyRecyclerViewAdapter adapter;
     Thread thread=new Thread();
+    final Handler handler = new Handler();  // useed for repititve tasks
+    Runnable run;
+
     //RecyclerViewAdapter adapter;
     String[] data = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
     RecyclerView recyclerView;
@@ -80,6 +83,9 @@ public class GamePlay extends AppCompatActivity {
 
         if(thread.getName().equals("creatingUI")){
             thread.interrupt();
+            handler.removeCallbacks(run); // removing repetitve tasks
+
+
         }
         thread= new Thread(new Runnable() {
             @Override
@@ -118,12 +124,12 @@ public class GamePlay extends AppCompatActivity {
 
     private void startTimer() {
 
-        final Handler handler = new Handler(); // it allows delaying
-        Runnable run = new Runnable() {  //chunk of code that handler handles is called runnable
+         // it allows delaying
+         run = new Runnable() {  //chunk of code that handler handles is called runnable
             @Override
             public void run() {
                 // code to be run every second or afteer a period of time
-                handler.postDelayed(this, 1000);
+                handler.postDelayed(run, 1000);
                 updateTime();
             }
         };
@@ -141,6 +147,6 @@ public class GamePlay extends AppCompatActivity {
     }
 
     public void resettimer() {
-        timertextView.setText("00");
+        timertextView.setText("0");
     }
 }
